@@ -43,9 +43,20 @@ public class Employe {
         this.tempsPartiel = tempsPartiel;
     }
 
+    /**
+     * On calcul en nombre d'années par rapport à l'année d'embauche initiale de l'employé.
+     * On se base uniquement sur l'année.
+     * On considère que l'employé n'a pas quitté l'entreprise entre temps.
+     * Lors du départ d'un employé, celui-ci est supprimé de la base.
+     *
+     * @return le nombre d'année d'ancienneté de l'employé
+     */
     public Integer getNombreAnneeAnciennete() {
-        //TODO
-        return null;
+        if(this.dateEmbauche != null && this.dateEmbauche.isBefore(LocalDate.now())){
+            return LocalDate.now().getYear() - this.dateEmbauche.getYear();
+        }
+        //0 année d'ancienneté en cas de date d'embauche non fournie ou future
+        return 0;
     }
 
     public Integer getNbConges() {
